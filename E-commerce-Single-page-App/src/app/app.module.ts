@@ -13,8 +13,8 @@ import { environment } from '../environments/environment';
     AngularFireDatabaseModule,
     AngularFireAuthModule,
   ],
-  declarations: [ AppComponent ],
-  bootstrap: [ AppComponent ]
+  declarations: [AppComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule {
 
