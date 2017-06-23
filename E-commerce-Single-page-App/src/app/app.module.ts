@@ -11,9 +11,11 @@ import { environment } from '../environments/environment';
     BrowserModule,
     AngularFireModule.initializeApp(environment.firebase, 'E-commerce-Single-page-App'),
     AngularFireDatabaseModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
   ],
   declarations: [ AppComponent ],
-    bootstrap: [ AppComponent ]
+  bootstrap: [ AppComponent ]
 })
-export class AppModule {}
+export class AppModule {
+
+}
