@@ -6,11 +6,11 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: '<your-key>',
-    authDomain: '<your-project-authdomain>',
-    databaseURL: '<your-database-URL>',
-    projectId: '<your-project-id>',
-    storageBucket: '<your-storage-bucket>',
-    messagingSenderId: '<your-messaging-sender-id>'
+    apiKey: 'AIzaSyCyEd2xMIF8QocDaIIcDaRKLmzpC263TbI',
+    authDomain: 'e-commerce-single-page-app.firebaseapp.com',
+    databaseURL: 'https://e-commerce-single-page-app.firebaseio.com',
+    projectId: 'e-commerce-single-page-app',
+    storageBucket: 'e-commerce-single-page-app.appspot.com',
+    messagingSenderId: '90777062058'
   }
 };
