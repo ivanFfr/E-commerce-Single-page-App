@@ -3,31 +3,25 @@
 
     <ul class="nav nav-tabs">
       <form class="nav nav-tabs navbar-form navbar-left">
-        <li><a routerLink="home" routerLink="home" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home<span class="sr-only">(current)</span></a></li>
-        <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Store <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a routerLink="/men">Men</a></li>
-            <li><a routerLink="/women">Women</a></li>
-            <li><a routerLink="/kids">Kids</a></li>
-          </ul>
-        </li>
-      </form>
-      <form class="nav nav-tabs navbar-form navbar-left">
-        <li><input type="text" class="form-control" placeholder="Search"></li>
-        <li><a routerLink="">Search</a></li>
+        <li><a class="btn btn-info" routerLink="store" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Store<span class="sr-only">(current)</span></a></li>
+        <li><a class="btn btn-info" routerLink="store/men" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Men</a></li>
+        <li><a class="btn btn-info" routerLink="store/women" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Women</a></li>
+        <li><a class="btn btn-info" routerLink="store/kids" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Kids</a></li>
       </form>
       <form class="nav nav-tabs navbar-form navbar-right">
-        <li *ngIf="isAuthenticated() == false"><a routerLink="/login" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"> Sign In</a></li>
-        <li *ngIf="isAuthenticated() == false"><a routerLink="/register" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Register</a></li>
+        <li *ngIf="isAuthenticated() == false"><a class="btn btn-info" routerLink="/login" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"> Sign In</a></li>
+        <li *ngIf="isAuthenticated() == false"><a class="btn btn-info" routerLink="/register" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Register</a></li>
         <li class="dropdown" *ngIf="isAuthenticated() == true">
-          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Profile<span class="caret"></span></a>
+          <a class="dropdown-toggle" class="btn btn-info" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Profile<span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a routerLink="/user">Profile</a></li>
-            <li><a routerLink="/settings">Settings</a></li>
-            <li><a routerLink="/login" (click)="logOut()">Sign out</a></li>
+            <li><a [routerLink]="userDisplayUrl" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Profile</a></li>
+            <li><a routerLink="/settings" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Settings</a></li>
+            <li><a routerLink="/login" (click)="logOut()" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Sign out</a></li>
           </ul>
         </li>
+      </form>
+      <form class="nav nav-tabs navbar-form navbar-right">
+        <li><a routerLink="admin" class="btn btn-info" *ngIf="isAdmin() == true" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Add Item<span class="sr-only">(current)</span></a></li>
       </form>
     </ul>
   </nav>

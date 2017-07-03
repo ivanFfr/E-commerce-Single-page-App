@@ -1,38 +1,49 @@
-<div *ngIf="error" class="alert alert-warning" role="alert">
-  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-  <span class="sr-only">Error:</span> {{error}}
-</div>
-<div class="modal-dialog">
-  <div class="registermodal-container">
-    <h1>Register</h1>
-    <br>
-    <form class="form-signin" (submit)="register(firstName.value, lastName.value, email.value, phone.value, password.value, address.value)">
-      <div class="form-group">
-        <label for="inputFirstName">First Name</label>
-        <input #firstName type="text" class="form-control" name="inputFirstName" placeholder="First Name" required="required" />
-      </div>
-      <div class="form-group">
-        <label for="inputLastName">Last Name</label>
-        <input #lastName type="text" class="form-control" name="inputLastName" placeholder="Last Name" required="required" />
-      </div>
-      <div class="form-group">
-        <label for="inputEmail">Email address</label>
-        <input #email type="email" class="form-control" name="inputEmail" placeholder="Email address" required="required" />
-      </div>
-      <div class="form-group">
-        <label for="inputPhone">Phone Number</label>
-        <input #phone type="text" class="form-control" name="inputPhone" placeholder="Phone Number" required="required" />
-      </div>
-      <div class="form-group">
-        <label for="inputPassword">Password</label>
-        <input #password type="password" class="form-control" name="inputPassword" placeholder="Password" required="required" />
-      </div>
-      <div class="form-group">
-        <label for="inputAddress">Address</label>
-        <input #address type="text" class="form-control" name="inputAddress" placeholder="Address" required="required" />
-      </div>
-      <br>
-      <button class="btn btn-md btn-primary btn-block" type="submit">Register</button>
-    </form>
+<div class="well">
+  <div class="container-fluid">
+    <div class="row">
+      <form [formGroup]="ngForm" (ngSubmit)="register(ngForm.value)">
+        <div class="col-xs-6 col-md-offset-3 ">
+          <h3 class="text-center"><strong>Register</strong></h3>
+          <br>
+          <div class="form-group">
+            <label for="inputFirstName">First Name</label>
+            <input formControlName="firstName" type="text" class="form-control" name="inputFirstName" placeholder="First Name" ngModel
+              required />
+          </div>
+          <div class="alert alert-danger" *ngIf="!ngForm.controls['firstName'].valid && ngForm.controls['firstName'].touched"><strong>{{ alertMsg }}</strong></div>
+          <div class="form-group">
+            <label for="inputLastName">Last Name</label>
+            <input formControlName="lastName" type="text" class="form-control" name="inputLastName" placeholder="Last Name" ngModel required/>
+          </div>
+          <div class="alert alert-danger" *ngIf="!ngForm.controls['lastName'].valid && ngForm.controls['lastName'].touched"><strong>{{ alertMsg }}</strong></div>
+          <div class="form-group">
+            <label for="inputEmail">Email address</label>
+            <input formControlName="email" type="email" class="form-control" name="inputEmail" placeholder="Email address" ngModel required/>
+          </div>
+          <div class="alert alert-danger" *ngIf="!ngForm.controls['email'].valid && ngForm.controls['email'].touched"><strong>{{ alertMsg }}</strong></div>
+          <div class="form-group">
+            <label for="inputPhone">Phone Number</label>
+            <input formControlName="phone" type="text" class="form-control" name="inputPhone" placeholder="Phone Number" ngModel required/>
+          </div>
+          <div class="alert alert-danger" *ngIf="!ngForm.controls['phone'].valid && ngForm.controls['phone'].touched"><strong>{{ alertMsg }}</strong></div>
+          <div class="form-group">
+            <label for="inputPassword">Password</label>
+            <input formControlName="password" type="password" class="form-control" name="inputPassword" placeholder="Password" ngModel
+              required />
+          </div>
+          <div class="alert alert-danger" *ngIf="!ngForm.controls['password'].valid && ngForm.controls['password'].touched"><strong>{{ alertMsg }}</strong></div>
+          <div class="form-group">
+            <label for="inputAddress">Address</label>
+            <input formControlName="address" type="text" class="form-control" name="inputAddress" placeholder="Address" ngModel required/>
+          </div>
+          <div class="alert alert-danger" *ngIf="!ngForm.controls['address'].valid && ngForm.controls['address'].touched"><strong>{{ alertMsg }}</strong></div>
+          <br>
+          <button class="btn btn-md btn-primary btn-block" type="submit" [disabled]="!ngForm.valid">Register</button>
+          <br>
+          <a routerLink="/login" class="text-center"><span>Have account? Log In Now!</span></a>
+          <br>
+        </div>
+      </form>
+    </div>
   </div>
 </div>

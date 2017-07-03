@@ -1,0 +1,61 @@
+<div class="well">
+  <div class="container-fluid">
+    <div class="row">
+      <form [formGroup]="ngForm" (ngSubmit)="addItem(ngForm.value)">
+        <div class="col-xs-6 col-md-offset-3 ">
+          <div>
+            <h4 class="text-center">Add new Item:</h4>
+            <br>
+            <div class="form-group">
+              <label for="gender">Gender</label>
+              <div class="radio">
+                <label><input type="radio" name="gender" value="Men" formControlName="gender">Men</label>
+                <label><input type="radio" name="gender" value="Women" formControlName="gender">Women
+                <label><input type="radio" name="gender" value="Kids" formControlName="gender">Kids</label></label>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="brand">Brand</label>
+              <input formControlName="brand" type="text" class="form-control" name="brand" placeholder="Brand" ngModel required />
+            </div>
+            <div class="alert alert-danger" *ngIf="!ngForm.controls['brand'].valid && ngForm.controls['brand'].touched"><strong>{{ alertMsg }}</strong></div>
+            <div class="form-group">
+              <label for="size">Size</label>
+              <input formControlName="size" type="size" class="form-control" name="size" placeholder="Size" ngModel required />
+            </div>
+            <div class="alert alert-danger" *ngIf="!ngForm.controls['size'].valid && ngForm.controls['size'].touched"><strong>{{ alertMsg }}</strong></div>
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input formControlName="name" type="text" class="form-control" name="name" placeholder="Name" ngModel required />
+            </div>
+            <div class="alert alert-danger" *ngIf="!ngForm.controls['name'].valid && ngForm.controls['name'].touched"><strong>{{ alertMsg }}</strong></div>
+            <div class="form-group">
+              <label for="description">Description</label>
+              <input formControlName="description" type="description" class="form-control" name="description" placeholder="Description"
+                ngModel required />
+            </div>
+            <div class="alert alert-danger" *ngIf="!ngForm.controls['description'].valid && ngForm.controls['description'].touched"><strong>{{ alertMsg }}</strong></div>
+            <div class="form-group">
+              <label for="imgUrl">Image Link</label>
+              <input formControlName="imgUrl" type="text" class="form-control" name="imgUrl" placeholder="Image Url" ngModel required />
+            </div>
+            <div class="alert alert-danger" *ngIf="!ngForm.controls['imgUrl'].valid && ngForm.controls['imgUrl'].touched"><strong>{{ alertMsg }}</strong></div>
+            <div class="form-group">
+              <label for="price">Price</label>
+              <input formControlName="price" type="text" class="form-control" name="price" placeholder="Price" ngModel required/>
+            </div>
+            <div class="alert alert-danger" *ngIf="!ngForm.controls['price'].valid && ngForm.controls['price'].touched"><strong>{{ alertMsg }}</strong></div>
+            <div class="form-group">
+              <label for="itemUrl">Item Link</label>
+              <input formControlName="itemUrl" type="itemUrl" class="form-control" name="itemUrl" placeholder="Item Url" ngModel required/>
+            </div>
+            <div class="alert alert-danger" *ngIf="!ngForm.controls['itemUrl'].valid && ngForm.controls['itemUrl'].touched"><strong>{{ alertMsg }}</strong></div>
+            <br>
+            <button type="submit" class="btn btn-md btn-primary btn-block" [disabled]="!ngForm.valid">Add Item</button>
+            <br>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

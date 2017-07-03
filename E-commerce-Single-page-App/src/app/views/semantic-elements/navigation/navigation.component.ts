@@ -8,16 +8,18 @@ import { AuthService } from 'app/auth.service'
 })
 export class NavigationComponent implements OnInit {
   user = null;
+  userDisplayUrl;
+
   constructor(private auth: AuthService) {
+
   }
 
   isAuthenticated() {
-    this.user = this.auth.authState;
-    if (this.user == null) {
-      return false;
-    } else {
-      return true;
-    }
+    return this.auth.authenticated
+  }
+  isAdmin() {
+    return true
+    // return this.auth.isAdmin
   }
 
   logOut() {
@@ -26,6 +28,8 @@ export class NavigationComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.user = this.auth.authState;
+
   }
 
 }

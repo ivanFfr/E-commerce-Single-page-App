@@ -21,6 +21,10 @@ export class AuthService {
         return this.authState !== null;
     }
 
+    isAdmin() {
+
+    }
+
     // Returns current user data
     get currentUser(): any {
         return this.authenticated ? this.authState : null;
@@ -36,23 +40,18 @@ export class AuthService {
         return this.authenticated ? this.authState.uid : '';
     }
 
-    // Anonymous User
-    get currentUserAnonymous(): boolean {
-        return this.authenticated ? this.authState.isAnonymous : false
-    }
-
     // Returns current user display name or Guest
     get currentUserDisplayName(): string {
-        if (!this.authState) {
-            return 'Guest'
-        } else if (this.currentUserAnonymous) {
-            return 'Anonymous'
-        } else {
-            return this.authState['displayName'] || 'User without a Name'
-        }
+        const path = `users/${this.currentUserId}`;
+
+        this.db.object(path).subscribe(user => {
+            this.authState.firstName = user.firstName
+            this.authState.lastName = user.lastName
+        });
+        return this.authState.firstName + this.authState.lastName
     }
 
-    //// Email/Password Auth ////
+    // Email/Password Auth
 
     emailSignUp(firstName: string, lastName: string, email: string, phone: string, password: string, address: string) {
         return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
@@ -78,6 +77,7 @@ export class AuthService {
         return this.afAuth.auth.signInWithEmailAndPassword(email, password)
             .then((user) => {
                 this.authState = user
+                this.readUserData()
                 this.router.navigate([''])
             })
             .catch(error => {
@@ -87,41 +87,49 @@ export class AuthService {
             });
     }
 
-    // Sends email allowing user to reset password
-    resetPassword(email: string) {
-        const auth = firebase.auth();
+    // resetPassword(email: string) {
+    //     const auth = firebase.auth();
 
-        return auth.sendPasswordResetEmail(email)
-            .then(() => console.log('email sent'))
-            .catch((error) => console.log(error))
-    }
+    //     return auth.sendPasswordResetEmail(email)
+    //         .then(() => console.log('email sent'))
+    //         .catch((error) => console.log(error))
+    // }
 
-
-    //// Sign Out ////
+    // Sign Out
 
     signOut(): void {
         this.afAuth.auth.signOut();
         this.router.navigate(['login'])
     }
 
-
-    //// Helpers ////
-
     private updateUserData(): void {
-        // Writes user name and email to realtime db
-        // useful if your app displays information about users or for admin features
 
-        const path = `users/${this.currentUserId}`; // Endpoint on firebase
+        const path = `users/${this.currentUserId}`;
         const data = {
             email: this.authState.email,
             firstName: this.authState.firstName,
             lastName: this.authState.lastName,
             phone: this.authState.phone,
-            address: this.authState.address
+            address: this.authState.address,
+            urlAddress: this.authState.firstName + this.authState.lastName
         }
 
         this.db.object(path).update(data)
             .catch(error => console.log(error));
 
     }
+
+    private readUserData(): void {
+
+        const path = `users/${this.currentUserId}`;
+
+        this.db.object(path).subscribe(user => {
+            this.authState.firstName = user.firstName
+            this.authState.lastName = user.lastName
+            this.authState.phone = user.phone
+            this.authState.address = user.address
+            this.authState.urlAddress = user.urlAddress
+        });
+    }
+
 }

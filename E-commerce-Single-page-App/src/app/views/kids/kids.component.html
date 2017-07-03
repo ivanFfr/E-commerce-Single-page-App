@@ -1,0 +1,24 @@
+<div class="well">
+    <h4>Total Items for Kids: {{allItems.length}}</h4>
+    <div class="input-group col-xs-5">
+        <input #input type="text" class="form-control " placeholder="Search" (keyup)="search(input.value)" aria-describedby="basic-addon2">
+        <br>
+        <br>
+        <br>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div *ngFor="let item of filtered" class="col-xs-6 col-s-4 col-sm-3 col-lg-5th thumbnail">
+                <div class="cursor" [routerLink]="item.itemUrl">
+                    <a><img class="img-responsive img-thumbnail" src="{{item.imgUrl}}"></a>
+                    <div class="text-center">
+                        <span>{{item.brand}}</span>
+                        <br>
+                        <span>{{item.name}}</span>
+                        <span>{{item.price}}$</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
