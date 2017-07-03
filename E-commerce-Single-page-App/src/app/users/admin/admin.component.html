@@ -2,54 +2,56 @@
   <div class="container-fluid">
     <div class="row">
       <form [formGroup]="ngForm" (ngSubmit)="addItem(ngForm.value)">
-        <div class="col-xs-6 col-md-offset-3 ">
+        <div class="col-xs-6 col-md-offset-3 text-center">
           <div>
             <h3 class="text-center"><strong>Add new Item:</strong></h3>
             <br>
             <div class="form-group">
               <label for="gender">Gender</label>
-              <div class="radio">
-                <label><input type="radio" name="gender" value="Men" formControlName="gender">Men</label>
-                <label><input type="radio" name="gender" value="Women" formControlName="gender">Women
-                <label><input type="radio" name="gender" value="Kids" formControlName="gender">Kids</label></label>
+              <br>
+              <div class="btn-group"> <span data-toggle="buttons"></span>
+                <label class="btn btn-info active" for="men"><input checked="checked" id="men" type="radio" name="gender" value="Men" formControlName="gender" >Men</label>
+                <label class="btn btn-info" for="women"><input type="radio" id="women" name="gender" value="Women" formControlName="gender" >Women</label>
+                <label class="btn btn-info" for="kids"><input type="radio" id="kids" name="gender" value="Kids" formControlName="gender" >Kids</label>
               </div>
             </div>
-            <div class="form-group">
+            <div class="form-group text-left">
               <label for="brand">Brand</label>
               <input formControlName="brand" type="text" class="form-control" name="brand" placeholder="Brand" ngModel required />
             </div>
-            <div class="alert alert-danger" *ngIf="!ngForm.controls['brand'].valid && ngForm.controls['brand'].touched"><strong>{{ alertMsg }}</strong></div>
-            <div class="form-group">
+            <div class="alert alert-danger" *ngIf="!ngForm.controls['brand'].valid && ngForm.controls['brand'].touched"><strong>Brand name must be up to 20 characters!</strong></div>
+            <div class="form-group text-left">
               <label for="size">Size</label>
               <input formControlName="size" type="text" class="form-control" name="size" placeholder="Size" ngModel required />
             </div>
-            <div class="alert alert-danger" *ngIf="!ngForm.controls['size'].valid && ngForm.controls['size'].touched"><strong>{{ alertMsg }}</strong></div>
-            <div class="form-group">
+            <div class="alert alert-danger" *ngIf="!ngForm.controls['size'].valid && ngForm.controls['size'].touched"><strong>Input array of sizes like: 25,26,27</strong></div>
+            <div class="form-group text-left">
               <label for="itemName">Name</label>
-              <input formControlName="itemName" type="text" class="form-control" name="itemName" placeholder="Name" ngModel required />
+              <input formControlName="itemName" type="text" class="form-control" name="itemName" placeholder="Name" maxlength="20" ngModel
+                required />
             </div>
-            <div class="alert alert-danger" *ngIf="!ngForm.controls['itemName'].valid && ngForm.controls['itemName'].touched"><strong>{{ alertMsg }}</strong></div>
-            <div class="form-group">
+            <div class="alert alert-danger" *ngIf="!ngForm.controls['itemName'].valid && ngForm.controls['itemName'].touched"><strong>Item name must be up to 20 characters!</strong></div>
+            <div class="form-group text-left">
               <label for="description">Description</label>
               <input formControlName="description" type="description" class="form-control" name="description" placeholder="Description"
                 ngModel required />
             </div>
             <div class="alert alert-danger" *ngIf="!ngForm.controls['description'].valid && ngForm.controls['description'].touched"><strong>{{ alertMsg }}</strong></div>
-            <div class="form-group">
+            <div class="form-group text-left">
               <label for="imgUrl">Image Link</label>
               <input formControlName="imgUrl" type="text" class="form-control" name="imgUrl" placeholder="Image Url" ngModel required />
             </div>
             <div class="alert alert-danger" *ngIf="!ngForm.controls['imgUrl'].valid && ngForm.controls['imgUrl'].touched"><strong>{{ alertMsg }}</strong></div>
-            <div class="form-group">
-              <label for="price">Price</label>
-              <input formControlName="price" type="text" class="form-control" name="price" placeholder="Price" ngModel required/>
-            </div>
-            <div class="alert alert-danger" *ngIf="!ngForm.controls['price'].valid && ngForm.controls['price'].touched"><strong>{{ alertMsg }}</strong></div>
-            <div class="form-group">
+            <div class="form-group text-left">
               <label for="itemUrl">Item Link</label>
               <input formControlName="itemUrl" type="itemUrl" class="form-control" name="itemUrl" placeholder="Item Url" ngModel required/>
             </div>
             <div class="alert alert-danger" *ngIf="!ngForm.controls['itemUrl'].valid && ngForm.controls['itemUrl'].touched"><strong>{{ alertMsg }}</strong></div>
+            <div class="form-group text-left">
+              <label for="price">Price</label>
+              <input formControlName="price" type="text" class="form-control" name="price" placeholder="Price" ngModel required/>
+            </div>
+            <div class="alert alert-info" *ngIf="!ngForm.controls['price'].valid && ngForm.controls['price'].touched"><strong>Cmon the SWEET part!</strong></div>
             <br>
             <button type="submit" class="btn btn-md btn-primary btn-block" [disabled]="!ngForm.valid">Add Item</button>
             <br>

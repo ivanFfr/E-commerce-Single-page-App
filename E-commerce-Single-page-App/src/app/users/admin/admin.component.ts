@@ -12,7 +12,7 @@ export class AdminComponent implements OnInit {
 
   ngForm: FormGroup;
   item: any;
-  alertMsg = 'This Field is Required!';
+  alertMsg = 'You missed it? :O';
   gender = '';
   brand = '';
   size = '';
@@ -25,9 +25,9 @@ export class AdminComponent implements OnInit {
   constructor(private itemsService: ItemsService, private fb: FormBuilder) {
     this.ngForm = fb.group({
       'gender': [null, Validators.compose([Validators.required])],
-      'brand': [null, Validators.compose([Validators.required])],
+      'brand': [null, Validators.compose([Validators.required, Validators.maxLength(20)])],
       'size': [null, Validators.compose([Validators.required])],
-      'itemName': [null, Validators.compose([Validators.required])],
+      'itemName': [null, Validators.compose([Validators.required, Validators.maxLength(20)])],
       'description': [null, Validators.compose([Validators.required])],
       'imgUrl': [null, Validators.compose([Validators.required])],
       'price': [null, Validators.compose([Validators.required])],
@@ -39,8 +39,6 @@ export class AdminComponent implements OnInit {
   }
 
   addItem(item) {
-    console.log(item);
-
     this.gender = item.gender;
     this.brand = item.brand;
     this.size = item.size;
