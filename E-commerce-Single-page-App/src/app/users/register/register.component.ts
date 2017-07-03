@@ -13,7 +13,7 @@ export class RegisterComponent implements OnInit {
 
   ngForm: FormGroup;
   user: any;
-  alertMsg = 'This Field is Required!';
+  alertMsg = '';
   email = '';
   password = '';
   firstName = '';
@@ -23,11 +23,11 @@ export class RegisterComponent implements OnInit {
 
   constructor(private Auth: AuthService, private fb: FormBuilder) {
     this.ngForm = fb.group({
-      'email': [null, Validators.compose([Validators.required])],
-      'password': [null, Validators.compose([Validators.required])],
+      'email': [null, Validators.compose([Validators.required, Validators.email])],
+      'password': [null, Validators.compose([Validators.required, Validators.minLength(6)])],
       'firstName': [null, Validators.compose([Validators.required])],
       'lastName': [null, Validators.compose([Validators.required])],
-      'phone': [null, Validators.compose([Validators.required])],
+      'phone': [null, Validators.compose([Validators.required, Validators.minLength(10), Validators.maxLength(10)])],
       'address': [null, Validators.compose([Validators.required])],
     });
   }
@@ -38,5 +38,16 @@ export class RegisterComponent implements OnInit {
 
   register(user) {
     this.Auth.emailSignUp(user.firstName, user.lastName, user.email, user.phone, user.password, user.address)
+      .then(error => {
+        if (error !== undefined) {
+          if (error.code === 'auth/email-already-in-use') {
+            this.alertMsg = 'Email already exists!'
+          } else if (error.code === 'auth/invalid-email') {
+            this.alertMsg = 'Invalid email address!'
+          } else if (error.code === 'auth/weak-password') {
+            this.alertMsg = 'Weak password!'
+          }
+        }
+      })
   }
 }

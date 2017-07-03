@@ -12,21 +12,22 @@ export class ItemsService {
 
   items: FirebaseListObservable<any>;
   myItems: Array<Item> = [];
-  myItem: Array<Item> = [];
+  myItem: any;
 
   constructor(private db: AngularFireDatabase, private router: Router) {
     this.items = db.list('items');
   }
 
   getItemByItemUrl(itemUrl: string) {
-    this.myItem = []
     this.myItems.forEach(item => {
       if (item.itemUrl === itemUrl) {
-        this.myItem.push(item);
-      }
+        this.myItem = item;
 
+      }
     });
+    return Promise.resolve(this.myItem);
   }
+
 
   get returnAllItems() {
     return Promise.resolve(this.myItems);

@@ -16,7 +16,7 @@ export class AdminComponent implements OnInit {
   gender = '';
   brand = '';
   size = '';
-  name = '';
+  itemName = '';
   description = '';
   imgUrl = '';
   price = '';
@@ -27,7 +27,7 @@ export class AdminComponent implements OnInit {
       'gender': [null, Validators.compose([Validators.required])],
       'brand': [null, Validators.compose([Validators.required])],
       'size': [null, Validators.compose([Validators.required])],
-      'name': [null, Validators.compose([Validators.required])],
+      'itemName': [null, Validators.compose([Validators.required])],
       'description': [null, Validators.compose([Validators.required])],
       'imgUrl': [null, Validators.compose([Validators.required])],
       'price': [null, Validators.compose([Validators.required])],
@@ -39,17 +39,19 @@ export class AdminComponent implements OnInit {
   }
 
   addItem(item) {
+    console.log(item);
 
     this.gender = item.gender;
     this.brand = item.brand;
     this.size = item.size;
-    this.name = item.name;
+    this.itemName = item.itemName;
     this.description = item.description;
     this.imgUrl = item.imgUrl;
     this.price = item.price;
     this.itemUrl = item.itemUrl;
 
-    this.itemsService.updateItemData(this.gender, this.brand, this.size, name, this.description, this.imgUrl, this.price, this.itemUrl)
+    this.itemsService.updateItemData(this.gender, this.brand, this.size, this.itemName,
+      this.description, this.imgUrl, this.price, this.itemUrl)
   }
 
 }

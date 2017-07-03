@@ -65,11 +65,10 @@ export class AuthService {
 
                 this.updateUserData()
                 this.router.navigate(['']);
+                return undefined;
             })
             .catch(error => {
-                const errorMessage = error.message;
-                alert(errorMessage);
-                console.log(error);
+                return error;
             });
     }
 
@@ -79,11 +78,10 @@ export class AuthService {
                 this.authState = user
                 this.readUserData()
                 this.router.navigate([''])
+                return undefined;
             })
             .catch(error => {
-                const errorMessage = error.message;
-                alert(errorMessage);
-                console.log(error);
+                return error;
             });
     }
 

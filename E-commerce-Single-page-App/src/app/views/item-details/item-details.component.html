@@ -3,18 +3,24 @@
     <br>
     <div class="container-fluid">
         <div class="row">
-            <div *ngFor="let item of myItem" class="col-xs-6 col-s-4 col-sm-3 col-lg-5th thumbnail">
+            <div class="col-xs-12 col-s-12 col-sm-12 col-lg-12th thumbnail  center-block">
                 <div>
-                    <a><img class="img-responsive img-thumbnail" src="{{item.imgUrl}}"></a>
+                    <a><img  style="float:left" class="img-responsive img-thumbnail " src="{{myItem.imgUrl}}"></a>
+
                     <div class="text-center">
-                        <span>{{item.brand}}</span>
-                        <br>
-                        <span>{{item.name}}</span>
-                        <span>{{item.price}}$</span>
+                        <dl>
+                            <h3>{{myItem.name}}</h3>
+                            <h2><small>{{myItem.brand}}</small></h2>
+                            <dt>Description:</dt>
+                            <dd>{{myItem.description}}</dd>
+                            <dt>Sizes:</dt>
+                            <dd>{{myItem.size}}</dd>
+                            <dt class="text-success">Price: {{myItem.price}}</dt>
+                            <dd><button class="btn-link">Buy!</button></dd>
+                        </dl>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 </div>
