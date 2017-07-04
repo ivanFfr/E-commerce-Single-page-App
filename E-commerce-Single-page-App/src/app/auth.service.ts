@@ -9,38 +9,48 @@ import * as firebase from 'firebase';
 export class AuthService {
 
     authState: any = null;
+    admins: any[] = []
+    isAdmin: boolean;
 
     constructor(private afAuth: AngularFireAuth, private db: AngularFireDatabase, private router: Router) {
-        this.afAuth.authState.subscribe((auth) => {
-            this.authState = auth
-        });
+        this.afAuth.authState
+            .map(auth => auth)
+            .subscribe(user => {
+                this.authState = user
+
+                this.db.list('/admin')
+                    .map(state => state)
+                    .subscribe(admins => {
+                        admins.forEach(admin => {
+                            if (user.uid === admin.$key) {
+                                this.isAdmin = true
+                            }
+                        });
+                    });
+            });
+
     }
 
-    // Returns true if user is logged in
+    get Admin(): boolean {
+        return this.isAdmin
+    }
+
     get authenticated(): boolean {
         return this.authState !== null;
     }
 
-    isAdmin() {
-
-    }
-
-    // Returns current user data
     get currentUser(): any {
         return this.authenticated ? this.authState : null;
     }
 
-    // Returns
     get currentUserObservable(): any {
         return this.afAuth.authState
     }
 
-    // Returns current user UID
     get currentUserId(): string {
         return this.authenticated ? this.authState.uid : '';
     }
 
-    // Returns current user display name or Guest
     get currentUserDisplayName(): string {
         const path = `users/${this.currentUserId}`;
 
@@ -50,8 +60,6 @@ export class AuthService {
         });
         return this.authState.firstName + this.authState.lastName
     }
-
-    // Email/Password Auth
 
     emailSignUp(firstName: string, lastName: string, email: string, phone: string, password: string, address: string) {
         return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
@@ -76,7 +84,6 @@ export class AuthService {
         return this.afAuth.auth.signInWithEmailAndPassword(email, password)
             .then((user) => {
                 this.authState = user
-                this.readUserData()
                 this.router.navigate([''])
                 return undefined;
             })
@@ -85,18 +92,9 @@ export class AuthService {
             });
     }
 
-    // resetPassword(email: string) {
-    //     const auth = firebase.auth();
-
-    //     return auth.sendPasswordResetEmail(email)
-    //         .then(() => console.log('email sent'))
-    //         .catch((error) => console.log(error))
-    // }
-
-    // Sign Out
-
     signOut(): void {
         this.afAuth.auth.signOut();
+        this.isAdmin = false
         this.router.navigate(['login'])
     }
 
@@ -117,17 +115,27 @@ export class AuthService {
 
     }
 
-    private readUserData(): void {
+    readUserData(): any {
 
         const path = `users/${this.currentUserId}`;
 
-        this.db.object(path).subscribe(user => {
-            this.authState.firstName = user.firstName
-            this.authState.lastName = user.lastName
-            this.authState.phone = user.phone
-            this.authState.address = user.address
-            this.authState.urlAddress = user.urlAddress
-        });
+        this.db.list('/users')
+
+
+            .map((users) => (users))
+
+            .subscribe(user => {
+
+                user.forEach(element => {
+                    if (element.$key === this.authState.uid) {
+                        this.authState.firstName = element.firstName
+                        this.authState.lastName = element.lastName
+                        this.authState.phone = element.phone
+                        this.authState.address = element.address
+                        this.authState.urlAddress = element.urlAddress
+                    }
+                });
+            });
     }
 
 }

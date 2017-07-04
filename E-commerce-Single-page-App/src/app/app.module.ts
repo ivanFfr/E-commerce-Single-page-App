@@ -13,6 +13,7 @@ import { AppComponent } from './app.component';
 import { routes } from './app.routes';
 import { AuthService } from './auth.service'
 import { AuthGuard } from 'app/auth.guard';
+import { AdminGuard } from 'app/admin.guard';
 import { ItemsService } from 'app/shared/model/items-service.service'
 
 import { HeaderComponent } from './views/semantic-elements/header/header.component'
@@ -29,8 +30,6 @@ import { MenComponent } from './views/men/men.component';
 import { WomenComponent } from './views/women/women.component';
 import { KidsComponent } from './views/kids/kids.component';
 import { AdminComponent } from './users/admin/admin.component';
-
-
 
 @NgModule({
   imports: [
@@ -61,9 +60,10 @@ import { AdminComponent } from './users/admin/admin.component';
     AdminComponent,
 
   ],
-  providers: [AuthService, ItemsService, AuthGuard],
+  providers: [AuthService, ItemsService, AuthGuard, AdminGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule {
 
 }
+

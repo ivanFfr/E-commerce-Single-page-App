@@ -8,7 +8,7 @@ export class AuthGuard implements CanActivate {
 
     canActivate(): boolean {
         if (!this.authService.authenticated) {
-            this.router.navigate(['pagenotfound']);
+            this.router.navigate(['page-not-found']);
         }
         return this.authService.authenticated
     }

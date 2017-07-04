@@ -2,6 +2,7 @@ import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthService } from './auth.service'
 import { AuthGuard } from 'app/auth.guard';
+import { AdminGuard } from 'app/admin.guard';
 
 import { NotFoundComponent } from './views/not-found/not-found.component';
 import { HomeComponent } from './views/home/home.component';
@@ -53,9 +54,8 @@ export const router: Routes = [
             { path: 'user', component: UserComponent, canActivate: [AuthGuard] },
         ]
     },
-    { path: 'admin', component: AdminComponent },
+    { path: 'additem', component: AdminComponent, canActivate: [AdminGuard] },
     { path: '**', component: NotFoundComponent },
-    { path: 'notfound', component: NotFoundComponent }
 ]
 
 export const routes: ModuleWithProviders = RouterModule.forRoot(router);

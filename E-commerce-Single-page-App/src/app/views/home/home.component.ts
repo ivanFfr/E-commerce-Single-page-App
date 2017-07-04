@@ -15,9 +15,9 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.allItems = []
-    this.itemsService.returnAllItems
-      .then(items => {
-        this.allItems = items
+    this.itemsService.getAllItems()
+      .subscribe(item => {
+        this.allItems.push(item);
       });
 
   }

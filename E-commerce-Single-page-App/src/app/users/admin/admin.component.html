@@ -9,10 +9,10 @@
             <div class="form-group">
               <label for="gender">Gender</label>
               <br>
-              <div class="btn-group"> <span data-toggle="buttons"></span>
-                <label class="btn btn-info active" for="men"><input checked="checked" id="men" type="radio" name="gender" value="Men" formControlName="gender" >Men</label>
-                <label class="btn btn-info" for="women"><input type="radio" id="women" name="gender" value="Women" formControlName="gender" >Women</label>
-                <label class="btn btn-info" for="kids"><input type="radio" id="kids" name="gender" value="Kids" formControlName="gender" >Kids</label>
+              <div class="btn-group" data-toggle="radio">
+                <label class="btn btn-info" for="men"><input id="men" autocomplete="off" type="radio" name="gender" value="Men" formControlName="gender" >Men</label>
+                <label class="btn btn-info" for="women"><input type="radio" autocomplete="off" id="women" name="gender" value="Women" formControlName="gender" >Women</label>
+                <label class="btn btn-info" for="kids"><input type="radio" autocomplete="off" id="kids" name="gender" value="Kids" formControlName="gender" >Kids</label>
               </div>
             </div>
             <div class="form-group text-left">
@@ -27,10 +27,10 @@
             <div class="alert alert-danger" *ngIf="!ngForm.controls['size'].valid && ngForm.controls['size'].touched"><strong>Input array of sizes like: 25,26,27</strong></div>
             <div class="form-group text-left">
               <label for="itemName">Name</label>
-              <input formControlName="itemName" type="text" class="form-control" name="itemName" placeholder="Name" maxlength="20" ngModel
+              <input formControlName="itemName" type="text" class="form-control" name="itemName" placeholder="Name" maxlength="40" ngModel
                 required />
             </div>
-            <div class="alert alert-danger" *ngIf="!ngForm.controls['itemName'].valid && ngForm.controls['itemName'].touched"><strong>Item name must be up to 20 characters!</strong></div>
+            <div class="alert alert-danger" *ngIf="!ngForm.controls['itemName'].valid && ngForm.controls['itemName'].touched"><strong>Item name must be up to 40 characters!</strong></div>
             <div class="form-group text-left">
               <label for="description">Description</label>
               <input formControlName="description" type="description" class="form-control" name="description" placeholder="Description"

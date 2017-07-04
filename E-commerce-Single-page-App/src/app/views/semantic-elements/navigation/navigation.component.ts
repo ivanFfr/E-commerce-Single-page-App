@@ -14,22 +14,19 @@ export class NavigationComponent implements OnInit {
 
   }
 
+  ngOnInit() {
+  }
+
   isAuthenticated() {
     return this.auth.authenticated
   }
   isAdmin() {
-    return true
-    // return this.auth.isAdmin
+    return this.auth.Admin
   }
 
   logOut() {
     this.auth.signOut()
     this.isAuthenticated()
-  }
-
-  ngOnInit() {
-    this.user = this.auth.authState;
-
   }
 
 }

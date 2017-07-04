@@ -16,12 +16,12 @@ export class ItemDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.itemsService.getItemByItemUrl(this.itemUrl)
-      .then(item => {
-        this.myItem = item
-      })
-    // this.myItem = this.itemsService.myItems.filter(item => item.itemUrl.includes(this.itemUrl))
-    // console.log(this.myItem);
+    this.itemsService.getAllItems()
+      .subscribe(item => {
+        if (item.itemUrl === this.itemUrl) {
+          this.myItem = item;
+        }
+      });
   }
 
 }

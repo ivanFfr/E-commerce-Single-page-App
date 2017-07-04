@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+
 import { AngularFireDatabaseModule, AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { Router } from '@angular/router';
 import * as firebase from 'firebase';
@@ -15,44 +16,16 @@ export class ItemsService {
   myItem: any;
 
   constructor(private db: AngularFireDatabase, private router: Router) {
-    this.items = db.list('items');
+
   }
 
-  getItemByItemUrl(itemUrl: string) {
-    this.myItems.forEach(item => {
-      if (item.itemUrl === itemUrl) {
-        this.myItem = item;
+  getAllItems(): any {
+    return this.db.list('/items')
 
-      }
-    });
-    return Promise.resolve(this.myItem);
-  }
+      .flatMap(list => list)
 
+      .map((item) => (item))
 
-  get returnAllItems() {
-    return Promise.resolve(this.myItems);
-  }
-
-  getAllItems() {
-    this.myItems = []
-    this.items.subscribe(itemKeys => {
-
-      itemKeys.forEach(itemKey => {
-        const Item: Item = {
-          gender: itemKey.gender,
-          brand: itemKey.brand,
-          size: itemKey.size,
-          name: itemKey.name,
-          description: itemKey.description,
-          imgUrl: itemKey.imgUrl,
-          price: itemKey.price,
-          itemUrl: itemKey.itemUrl,
-          marked: itemKey.marked,
-        };
-        this.myItems.push(Item);
-      });
-
-    })
   }
 
   updateItemData(gender: string, brand: string, size: string, name: string, description: string,

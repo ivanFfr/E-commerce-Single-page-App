@@ -1,4 +1,25 @@
-<p>
-  user works!
-</p>
-<button (click)="ok()"></button>
+<div class="well">
+  <h4>Total Items: {{allItems?.length}}</h4>
+  <br>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-3 col-s-3 col-sm-3 col-lg-3th thumbnail  center-block">
+        <div>
+          <a><img  style="float:left" class="img-responsive img-thumbnail " src="{{myItem.imgUrl}}"></a>
+        </div>
+      </div>
+      <div class="text-center col-xs-9 col-s-9 col-sm-9 col-lg-9th thumbnail  center-block">
+        <dl>
+          <h3>{{myItem.name}}</h3>
+          <h2><small>{{myItem.brand}}</small></h2>
+          <dt>Description:</dt>
+          <dd>{{myItem.description}}</dd>
+          <dt>Sizes:</dt>
+          <dd>{{myItem.size}}</dd>
+          <dt class="text-success">Price: {{myItem.price}}</dt>
+          <dd><button class="btn-link"><strong>Buy!</strong></button></dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+</div>

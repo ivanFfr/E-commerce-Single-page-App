@@ -27,7 +27,7 @@ export class AdminComponent implements OnInit {
       'gender': [null, Validators.compose([Validators.required])],
       'brand': [null, Validators.compose([Validators.required, Validators.maxLength(20)])],
       'size': [null, Validators.compose([Validators.required])],
-      'itemName': [null, Validators.compose([Validators.required, Validators.maxLength(20)])],
+      'itemName': [null, Validators.compose([Validators.required, Validators.maxLength(40)])],
       'description': [null, Validators.compose([Validators.required])],
       'imgUrl': [null, Validators.compose([Validators.required])],
       'price': [null, Validators.compose([Validators.required])],

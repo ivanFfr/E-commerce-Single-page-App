@@ -8,30 +8,25 @@ import { ItemsService } from 'app/shared/model/items-service.service';
   styleUrls: ['./women.component.css']
 })
 export class WomenComponent implements OnInit {
-
   allItems: Array<Item> = [];
   filtered: Array<Item> = [];
+
   constructor(private itemsService: ItemsService) {
   }
 
   ngOnInit() {
     this.allItems = [];
     this.filtered = [];
-    this.itemsService.returnAllItems
-      .then(items => {
-        this.allItems = this.filtered = items.filter(item => item.gender.includes('Women'))
+    this.itemsService.getAllItems()
+      .subscribe(item => {
+        this.allItems.push(item);
+        this.filtered = this.allItems.filter(by => by.gender.includes('Women'));
+        this.allItems = this.filtered;
       });
   }
 
   search(search: string) {
     this.filtered = this.allItems.filter(item => item.description.includes(search))
-  }
-
-  nextPage() {
-
-  }
-  prevPage() {
-
   }
 
 }

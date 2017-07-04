@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Item } from '../../shared/model/item'
+import { ItemsService } from 'app/shared/model/items-service.service';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from 'app/auth.service';
 
 @Component({
@@ -7,18 +10,19 @@ import { AuthService } from 'app/auth.service';
   styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
+  userUrl;
+  authState: any = null;
 
-  authState: any = null
-
-  constructor(private auth: AuthService) {
-    this.authState = auth.authState
+  constructor(private authService: AuthService, private router: Router, private activatedRoute: ActivatedRoute) {
+    activatedRoute.url.subscribe((url) => this.userUrl = url[0].path);
   }
-  ok() {
-    console.log(this.authState.firstName);
 
-  }
 
   ngOnInit() {
-  }
 
+    
+
+    console.log(this.authState);
+
+  }
 }
