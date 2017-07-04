@@ -26,7 +26,8 @@ export class WomenComponent implements OnInit {
   }
 
   search(search: string) {
-    this.filtered = this.allItems.filter(item => item.description.includes(search))
+    this.filtered = this.allItems.filter(item =>
+      item.description.toLocaleLowerCase().includes(search.toLocaleLowerCase()));
   }
 
 }
